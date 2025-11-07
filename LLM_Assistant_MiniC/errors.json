@@ -1,0 +1,22 @@
+{
+  "Missing semicolon": {
+    "type": "syntax",
+    "explanation": "You missed a semicolon (;) at the end of a statement.",
+    "fix": "Add a semicolon at the end of the line causing the error."
+  },
+  "Type mismatch": {
+    "type": "semantic",
+    "explanation": "You're trying to assign a value of one type to a variable of another type.",
+    "fix": "Ensure that both sides of the assignment are of the same type or use casting."
+  },
+  "Division by zero": {
+    "type": "runtime",
+    "explanation": "Your program is attempting to divide by zero, which is undefined.",
+    "fix": "Add a condition to check if the denominator is zero before dividing."
+  },
+  "Compilation successful": {
+    "type": "success",
+    "explanation": "No issues found in the code.",
+    "fix": "No changes needed."
+  }
+}

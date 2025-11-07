@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Mini C Compiler + Gemini LLM Assistant</h2>
+
+<div class="container">
+  <div class="editor">
+    <h3>Source Code</h3>
+    <textarea id="code"></textarea>
+    <button id="runBtn">Run Code ▶️</button>
+  </div>
+
+  <div class="output">
+    <h3>Compilation Result</h3>
+    <pre id="compilerOutput"></pre>
+
+    <h3>Program Output</h3>
+    <pre id="programOutput"></pre>
+
+    <h3>LLM Feedback</h3>
+    <pre id="llmFeedback"></pre>
+
+    <h3>Corrected Code</h3>
+    <pre id="correctedCode"></pre>
+    <button id="replaceBtn" style="display:none;">✅ Replace Source Code</button>
+  </div>
+</div>
+
+<script>
+document.getElementById("runBtn").onclick = async () => {
+  let code = document.getElementById("code").value;
+
+  let res = await fetch("/compile", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({source_code: code})
+  });
+  let data = await res.json();
+
+  compilerOutput.textContent = data.compiler_output;
+  programOutput.textContent = data.program_output;
+  llmFeedback.textContent = data.llm_feedback;
+
+  let fix = await fetch("/fix", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({source_code: code})
+  });
+  let fixData = await fix.json();
+  correctedCode.textContent = fixData.corrected_code;
+  replaceBtn.style.display = "block";
+};
+
+replaceBtn.onclick = () => {
+  document.getElementById("code").value = correctedCode.textContent;
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --bg: 0 0% 100%;
+    --card: 0 0% 100%;
+    --border: 0 0% 90%;
+    --text: 222 47% 11%;
+    --accent: 174 72% 56%;
+  }
+
+  .dark {
+    --bg: 222 47% 11%;
+    --card: 222 47% 14%;
+    --border: 222 37% 20%;
+    --text: 210 40% 98%;
+    --accent: 174 72% 56%;
+  }
+
+  body {
+    @apply bg-[hsl(var(--bg))] text-[hsl(var(--text))] font-mono;
+  }
+
+  .panel {
+    @apply bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-lg p-4 shadow;
+  }
+
+  .button {
+    @apply px-4 py-2 rounded-md font-medium transition bg-[hsl(var(--accent))] text-black hover:opacity-80;
+  }
+
+  .terminal {
+    @apply bg-black text-green-400 p-3 rounded font-mono text-sm overflow-auto;
+  }
+}
